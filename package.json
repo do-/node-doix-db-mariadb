@@ -1,0 +1,55 @@
+{
+  "name": "doix-db-mariadb",
+  "version": "1.0.0",
+  "description": "MariaDB support for doix",
+  "main": "index.js",
+  "files": [
+    "/lib",
+    "/badges"
+  ],
+  "scripts": {
+    "test-ci": "jest --ci --coverage",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/do-/node-doix-db-mariadb.git"
+  },
+  "keywords": [
+    "mariadb",
+    "doix"
+  ],
+  "author": "Dmitry Ovsyanko",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/do-/node-doix-db-mariadb/issues"
+  },
+  "homepage": "https://github.com/do-/node-doix-db-mariadb#readme",
+  "peerDependencies": {
+    "doix-db": "^1.0.74"
+  },
+  "devDependencies": {
+    "jest": "^29.3.1"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "lib/**/*.js"
+    ],
+    "coverageReporters": [
+      "clover",
+      "json",
+      "lcov",
+      "text",
+      "json-summary"
+    ],
+    "verbose": false,
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "/__tests__/data",
+      "/__tests__/lib"
+    ]
+  },
+  "dependencies": {
+    "mariadb": "^3.4.2"
+  }
+}
