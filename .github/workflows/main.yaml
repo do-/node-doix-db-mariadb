@@ -1,0 +1,47 @@
+name: e2e tests
+on:
+  - push
+  - pull_request
+
+jobs:
+  e2e:
+    runs-on: ubuntu-latest
+    container: library/node:16-alpine
+
+    services:
+      mariadb-10:
+        image: mariadb:10.1
+        env:
+          MYSQL_DATABASE: app
+          MYSQL_USER: app
+          MYSQL_PASSWORD: z
+          MYSQL_ROOT_PASSWORD: z
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd "mysqladmin ping -h localhost"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+          --health-start-period 30s
+
+    steps:
+      - name: Install git for jest-badges-action
+        run: apk --no-cache add git
+
+      - name: Config git
+        run: git config --global --add safe.directory '*'
+
+      - name: Check out repository code
+        uses: actions/checkout@v3.1.0
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: npm run test-ci
+        env:
+          CONNECTION_STRING: 'mariadb://app:z@mariadb-10:3306/app'
+
+      - name: Generating coverage badges
+        uses: jpb06/jest-badges-action@latest
