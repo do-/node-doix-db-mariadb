@@ -8,6 +8,7 @@
     "/badges"
   ],
   "scripts": {
+    "test-install": "which docker && (docker rm -f mariadb-10 2>/dev/null || true) && docker run -d --name mariadb-10 -p 3306:3306 -e MYSQL_DATABASE=app -e MYSQL_USER=app -e MYSQL_PASSWORD=z -e MYSQL_ROOT_PASSWORD=z mariadb:10.1 && export CONNECTION_STRING=mariadb://app:z@mariadb-10:3306/app || true",
     "test-ci": "jest --ci --coverage",
     "test": "jest"
   },
