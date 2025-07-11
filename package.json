@@ -1,6 +1,6 @@
 {
   "name": "doix-db-mariadb",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "MariaDB support for doix",
   "main": "index.js",
   "files": [
