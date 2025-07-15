@@ -4,13 +4,12 @@ module.exports = {
     
     parameters: [
     	'id int',
-    	'label text = NULL',
     ],
 
     returns: 'int',
 
     lang: 'sql',
 
-    body: 'SELECT id + 1',
+    body: 'RETURN id + 1',
 
 }
