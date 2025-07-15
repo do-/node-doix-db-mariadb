@@ -1,5 +1,5 @@
 const Path = require ('path')
-const {DbModel, DbView} = require ('doix-db')
+const {DbModel, DbView, DbProcedure} = require ('doix-db')
 const MockJob = require ('./lib/MockJob.js'), job = new MockJob ()
 const {DbPoolMy} = require ('..')
 
@@ -39,7 +39,23 @@ test ('basic', async () => {
 			expect (a).toStrictEqual ([{id: 1}])
 
 		}
-		
+
+		for (const o of model.objects ()) if (o instanceof DbProcedure) {
+			
+			await db.do (lang.genReCreate (o))
+
+		}
+
+		{
+
+			const a = await db.getArray ('CALL proc_1 (?)', [2])
+
+			expect (a).toStrictEqual ([{id: 2}])
+
+			expect (a [Symbol.for ('call')].okPacket).toEqual ({affectedRows: 0, insertId: 0n, warningStatus: 0})
+
+		}
+
 	}
 	finally {
 
