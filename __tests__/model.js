@@ -30,6 +30,8 @@ test ('basic', async () => {
 
 	 	var db = await pool.setResource (job, 'db'), {lang} = db
 
+		expect (() => lang.genReCreate ({})).toThrow ()
+
 		for (const o of model.objects ()) if (o instanceof DbView) await db.do (lang.genReCreate (o))
 
 		{
@@ -41,7 +43,7 @@ test ('basic', async () => {
 		}
 
 		for (const o of model.objects ()) if (o instanceof DbProcedure) {
-			
+
 			await db.do (lang.genReCreate (o))
 
 		}
