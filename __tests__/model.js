@@ -92,7 +92,7 @@ test ('basic', async () => {
 
 			await db.do (`TRUNCATE __drop_me`)
 
-			for (const sql of lang.genReCreateTriggers ()) await db.do (sql)
+			for (const sql of lang.genReCreateTriggers (model.find ('__drop_me'))) await db.do (sql)
 
 			const id = await db.getScalar ('SELECT f_2 (?)', ['AAA'])
 
