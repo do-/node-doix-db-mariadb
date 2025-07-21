@@ -28,7 +28,7 @@ test ('basic', async () => {
 
 		model.loadModules ()
 
-	 	var db = await pool.setResource (job, 'db'), {lang} = db
+		var db = await pool.setResource (job, 'db'), {lang} = db
 
 		await db.do (`DROP TABLE IF EXISTS __drop_me`)
 
@@ -87,6 +87,23 @@ test ('basic', async () => {
 			expect (a).toStrictEqual ([{id: 1, label: 'AAA'}])
 
 		}
+
+		{
+
+			await db.do (`TRUNCATE __drop_me`)
+
+			for (const sql of lang.genReCreateTriggers ()) await db.do (sql)
+
+			const id = await db.getScalar ('SELECT f_2 (?)', ['AAA'])
+
+			expect (id).toBe (1)
+
+			const a = await db.getArray ('SELECT * FROM __drop_me')
+
+			expect (a).toStrictEqual ([{id: 1, label: '#0'}])
+
+		}
+
 
 		await db.do (`DROP TABLE IF EXISTS __drop_me`)
 
