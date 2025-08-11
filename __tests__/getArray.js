@@ -44,9 +44,7 @@ test ('getArray 1', async () => {
 
 		await db.do ('CREATE TABLE t (id int)')
 
-		await db.do ('INSERT INTO t (id) VALUES (?)', [1])
-		await db.do ('INSERT INTO t (id) VALUES (?)', [2])
-		await db.do ('INSERT INTO t (id) VALUES (?)', [3])
+		await db.do ('INSERT INTO t (id) VALUES (?)', [[1], [2], [3]])
 
 		{
 
