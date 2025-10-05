@@ -1,6 +1,6 @@
 {
   "name": "doix-db-mariadb",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "MariaDB support for doix",
   "main": "index.js",
   "files": [
@@ -27,7 +27,7 @@
   },
   "homepage": "https://github.com/do-/node-doix-db-mariadb#readme",
   "peerDependencies": {
-    "doix-db": "^1.0.76"
+    "doix-db": "^1.0.78"
   },
   "devDependencies": {
     "jest": "^29.3.1"
