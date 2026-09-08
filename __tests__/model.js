@@ -11,7 +11,7 @@ pool.logger = job.logger
 
 afterAll(async () => {
 
-	await pool.pool.end ()
+	await pool.close ()
 
 })
 
