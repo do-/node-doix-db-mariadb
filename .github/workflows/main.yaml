@@ -6,7 +6,7 @@ on:
 jobs:
   e2e:
     runs-on: ubuntu-latest
-    container: library/node:16-alpine
+    container: library/node:22-alpine
 
     services:
       mariadb-10:
